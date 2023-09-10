@@ -128,13 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\sim\ConnectionHandler.cpp" />
+    <ClCompile Include="src\ConnectionHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\sim\ConnectionHandler.hpp" />
-    <ClInclude Include="src\practices\Timer.3.hpp" />
-    <ClInclude Include="src\practices\Timer.4.hpp" />
+    <ClInclude Include="src\ConnectionHandler.hpp" />
+    <ClInclude Include="src\Timer.3\Timer.3.hpp" />
+    <ClInclude Include="src\Timer.4\Timer.4.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
