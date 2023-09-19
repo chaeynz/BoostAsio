@@ -1,36 +1,28 @@
 #include "ConnectionHandler.hpp"
-
-boost::asio::io_context ConnectionHandler::io;
-boost::asio::ip::tcp::endpoint ConnectionHandler::endpoint;
-
-void ConnectionHandler::sendMessage() {
-	boost::asio::ip::tcp::socket socket(io);
-
-	socket.connect(endpoint);
-
-	std::string message;
-
-	//boost::asio::write(message);
-
+void execute() {
+    boost::asio::io_context io_context;
+    ConnectionHandler conn(io_context, "localhost", "8080");
+    io_context.run();
 }
 
-void ConnectionHandler::listenMessage() {
-	boost::asio::ip::tcp::acceptor acceptor(io, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 8000));
-	boost::asio::ip::tcp::socket socket(io);
-
-	boost::system::error_code ec;
-	std::array<char, 128> buffer;
-
-	for (;;) {
-		acceptor.accept(socket, ec);
-
-		size_t length = socket.read_some(boost::asio::buffer(buffer), ec);
-		if (ec) {
-			std::cout << "Error\n";
-		}
-		else {
-			std::cout << std::string(buffer.data(), length) << std::endl;
-		}
-	}
-
+ConnectionHandler::ConnectionHandler(boost::asio::io_context& io_context, const std::string& server, const std::string& port)
+    : resolver_(io_context), socket_(io_context) {
+    do_connect(server, port);
+}
+void ConnectionHandler::do_connect(const std::string& server, const std::string& port) {
+    // Asynchronously resolve the server name
+    resolver_.async_resolve(server, port,
+        [this](boost::system::error_code ec, tcp::resolver::results_type endpoints) {
+            if (!ec) {
+                // Asynchronously connect to the first endpoint
+                boost::asio::async_connect(socket_, endpoints, 
+                    [this](boost::system::error_code ec, tcp::endpoint) {
+                        if (!ec) { 
+                            std::cout << "Connected successfully." << std::endl; 
+                        }
+                    }
+                );
+            }
+        }
+    );
 }
