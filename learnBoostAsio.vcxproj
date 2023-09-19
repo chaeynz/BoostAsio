@@ -131,6 +131,7 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sim\NetworkEngine.hpp" />
     <ClInclude Include="src\sim\EventHandler.hpp" />
     <ClInclude Include="src\practices\Daytime.3.hpp" />
     <ClInclude Include="src\practices\Timer.5.hpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="src\sim\ConnectionHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\sim\NetworkEngine.cpp" />
     <ClCompile Include="src\sim\EventHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sim\ConnectionHandler.cpp" />

@@ -19,7 +19,4 @@ public:
 	static void unregisterCallback(const Event&, const Callback&);
 	static void notify(const Event&);
 
-	static void onNetworkInputReceived();
-	static void onUserNotFoundLocally();
-
 };

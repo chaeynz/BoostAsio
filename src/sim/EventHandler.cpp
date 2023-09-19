@@ -17,16 +17,8 @@ void EventHandler::registerCallback(const Event& onEvent, const Callback& eventC
 void EventHandler::notify(const Event& onEvent) {
 	auto eventsIterator = eventSubscribers.find(onEvent);
 	if (eventsIterator != eventSubscribers.end()) {
-		for (const auto p_callback : eventSubscribers[onEvent]) {
-			p_callback();
+		for (const auto callback : eventSubscribers[onEvent]) {
+			callback();
 		}
 	}
-}
-
-inline void EventHandler::onNetworkInputReceived() {
-	notify(onNetworkInputReceived);
-}
-
-inline void EventHandler::onUserNotFoundLocally() {
-
 }

@@ -26,3 +26,8 @@ void ConnectionHandler::do_connect(const std::string& server, const std::string&
         }
     );
 }
+
+void ConnectionHandler::receiveData(boost::asio::ip::tcp::endpoint sender) {
+    boost::asio::ip::tcp::socket s(io, sender);
+    s.async_read_some(boost::asio::buffer(data_, maxLength), boost::bind)
+}
